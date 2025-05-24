@@ -14,7 +14,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 100);
     });
 });
-
 const contactForm = document.getElementById('contactForm');
 if (contactForm) {
     contactForm.addEventListener('submit', function(e) {
@@ -23,4 +22,39 @@ if (contactForm) {
         this.reset();
     });
 }
-
+const images = [
+            '../images/c.webp',
+            '../images/d.jpg',
+            '../images/k.jpg',
+            '../images/l.jpg'
+        ];
+        
+        let currentIndex = 0;
+        const currentImage = document.getElementById('currentImage');
+        const prevBtn = document.getElementById('end');
+        const nextBtn = document.getElementById('go');
+        const imageCounter = document.getElementById('imageCounter');
+        
+        function updateGallery() {
+            currentImage.src = images[currentIndex];
+            imageCounter.textContent = `${currentIndex + 1} / ${images.length}`;
+            
+            prevBtn.disabled = currentIndex === 0;
+            nextBtn.disabled = currentIndex === images.length - 1;
+        }
+        
+        prevBtn.addEventListener('click', () => {
+            if (currentIndex > 0) {
+                currentIndex--;
+                updateGallery();
+            }
+        });
+        
+        nextBtn.addEventListener('click', () => {
+            if (currentIndex < images.length - 1) {
+                currentIndex++;
+                updateGallery();
+            }
+        });
+        
+        updateGallery();
